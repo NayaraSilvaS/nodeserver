@@ -5,12 +5,22 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const path_1 = __importDefault(require("path"));
+const database_1 = __importDefault(require("./models/database"));
 const app = (0, express_1.default)();
 const port = 3000; // default port to listen
 app.set("views", path_1.default.join(__dirname, "views"));
 app.set("view engine", "twig");
 // define a route handler for the default home page
-app.get("/", (req, res) => {
+app.get("/", async (req, res) => {
+    try {
+        await database_1.default.authenticate();
+        // tslint:disable-next-line: no-console
+        console.log("\x1b[32mConnection has been established successfully.\x1b[0m");
+    }
+    catch (error) {
+        // tslint:disable-next-line: no-console
+        console.error("\x1b[31mUnable to connect to the database:\x1b[0m", error);
+    }
     res.render("cabecalho.html.twig");
 });
 // start the Express server
