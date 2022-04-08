@@ -128,3 +128,38 @@ export async function remove(req: Request, res: Response) {
     return res.status(422).send({ error: "Houve um error." });
   }
 }
+
+export async function paginate(req: Request, res: Response) {
+  try {
+    const { pagina = 1, nome = "", sobrenome = "", email = "" } = req.body;
+    const condicoes: any[] = [];
+
+    if (nome) {
+      condicoes.push({
+        nome: { [Op.like]: `${nome}%` },
+      });
+    }
+    if (sobrenome) {
+      condicoes.push({
+        sobrenome: { [Op.like]: `${sobrenome}%` },
+      });
+    }
+    if (email) {
+      condicoes.push({
+        email: { [Op.like]: `${email}%` },
+      });
+    }
+
+    const usuarios = await Usuario.findAndCountAll({
+      attributes: ["id", "nome", "sobrenome", "email"],
+      where: { [Op.and]: condicoes },
+      offset: 0,
+    });
+
+    return res.status(200).json({
+      usuarios,
+    });
+  } catch (error) {
+    return res.status(422).send({ error: "Houve um error." });
+  }
+}
