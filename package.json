@@ -24,6 +24,7 @@
   "homepage": "https://bitbucket.org/nayarasilvas/nodeserver#readme",
   "dependencies": {
     "express": "^4.17.3",
+    "express-validator": "^6.14.0",
     "mysql2": "^2.3.3",
     "sequelize": "^6.18.0",
     "twig": "^1.15.4"

@@ -1,10 +1,13 @@
 import express, { Request, Response } from "express";
+import bodyParser from "body-parser";
 import path from "path";
 import sequelize from "./models/database";
+import routes from "./routes";
 
 const app = express();
 const port = 3000; // default port to listen
 
+app.use(bodyParser.json());
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "twig");
 
@@ -20,6 +23,8 @@ app.get("/", async (req: Request, res: Response) => {
   }
   res.render("cabecalho.html.twig");
 });
+
+app.use("/", routes);
 
 // start the Express server
 app.listen(port, () => {
