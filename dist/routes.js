@@ -31,5 +31,6 @@ const UsuariosController = __importStar(require("./controllers/UsuariosControlle
 const usuarioFormulario_1 = __importDefault(require("./validation/usuarioFormulario"));
 const routes = express_1.default.Router();
 routes.post("/usuarios", usuarioFormulario_1.default, UsuariosController.adiciona);
+routes.put("/usuarios/:id", usuarioFormulario_1.default, UsuariosController.editar);
 exports.default = routes;
 //# sourceMappingURL=routes.js.map

@@ -38,3 +38,51 @@ export async function adiciona(req: Request, res: Response) {
     return res.status(422).send({ error: "Houve um error." });
   }
 }
+
+export async function editar(req: Request, res: Response) {
+  const errors: Result = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(424).json({ errors: errors.array() });
+  }
+
+  try {
+    const usuario = await Usuario.findOne({
+      where: { id: req.params.id },
+    });
+
+    if (!usuario) {
+      return res.status(404).send({ error: "Usuário não encontrado." });
+    }
+
+    const used = await Usuario.findOne({
+      where: {
+        [Op.and]: [
+          { email: req.body.email },
+          { id: { [Op.ne]: req.params.id } },
+        ],
+      },
+    });
+
+    if (used) {
+      return res.status(422).send({ error: "Email já em uso." });
+    }
+
+    await usuario.update(req.body);
+
+    await Historico.create({
+      usuarioId: usuario.id,
+      dados: JSON.stringify(usuario),
+    });
+
+    return res.status(200).json({
+      id: usuario.id,
+      nome: usuario.nome,
+      sobrenome: usuario.sobrenome,
+      email: usuario.email,
+    });
+
+    return res.status(200).json({});
+  } catch (error) {
+    return res.status(422).send({ error: "Houve um error." });
+  }
+}

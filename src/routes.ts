@@ -5,5 +5,6 @@ import usuarioFormulario from "./validation/usuarioFormulario";
 const routes = express.Router();
 
 routes.post("/usuarios", usuarioFormulario, UsuariosController.adiciona);
+routes.put("/usuarios/:id", usuarioFormulario, UsuariosController.editar);
 
 export default routes;

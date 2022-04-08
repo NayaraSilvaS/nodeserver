@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.adiciona = void 0;
+exports.editar = exports.adiciona = void 0;
 const express_validator_1 = require("express-validator");
 const sequelize_1 = require("sequelize");
 const Usuario_1 = __importDefault(require("../models/Usuario"));
@@ -39,4 +39,45 @@ async function adiciona(req, res) {
     }
 }
 exports.adiciona = adiciona;
+async function editar(req, res) {
+    const errors = (0, express_validator_1.validationResult)(req);
+    if (!errors.isEmpty()) {
+        return res.status(424).json({ errors: errors.array() });
+    }
+    try {
+        const usuario = await Usuario_1.default.findOne({
+            where: { id: req.params.id },
+        });
+        if (!usuario) {
+            return res.status(404).send({ error: "Usuário não encontrado." });
+        }
+        const used = await Usuario_1.default.findOne({
+            where: {
+                [sequelize_1.Op.and]: [
+                    { email: req.body.email },
+                    { id: { [sequelize_1.Op.ne]: req.params.id } },
+                ],
+            },
+        });
+        if (used) {
+            return res.status(422).send({ error: "Email já em uso." });
+        }
+        await usuario.update(req.body);
+        await Historico_1.default.create({
+            usuarioId: usuario.id,
+            dados: JSON.stringify(usuario),
+        });
+        return res.status(200).json({
+            id: usuario.id,
+            nome: usuario.nome,
+            sobrenome: usuario.sobrenome,
+            email: usuario.email,
+        });
+        return res.status(200).json({});
+    }
+    catch (error) {
+        return res.status(422).send({ error: "Houve um error." });
+    }
+}
+exports.editar = editar;
 //# sourceMappingURL=UsuariosController.js.map
