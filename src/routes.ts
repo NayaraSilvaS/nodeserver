@@ -6,5 +6,6 @@ const routes = express.Router();
 
 routes.post("/usuarios", usuarioFormulario, UsuariosController.adiciona);
 routes.put("/usuarios/:id", usuarioFormulario, UsuariosController.editar);
+routes.get("/usuarios/:id", UsuariosController.get);
 
 export default routes;

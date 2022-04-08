@@ -80,8 +80,27 @@ export async function editar(req: Request, res: Response) {
       sobrenome: usuario.sobrenome,
       email: usuario.email,
     });
+  } catch (error) {
+    return res.status(422).send({ error: "Houve um error." });
+  }
+}
 
-    return res.status(200).json({});
+export async function get(req: Request, res: Response) {
+  try {
+    const usuario = await Usuario.findOne({
+      where: { id: req.params.id },
+    });
+
+    if (!usuario) {
+      return res.status(404).send({ error: "Usuário não encontrado." });
+    }
+
+    return res.status(200).json({
+      id: usuario.id,
+      nome: usuario.nome,
+      sobrenome: usuario.sobrenome,
+      email: usuario.email,
+    });
   } catch (error) {
     return res.status(422).send({ error: "Houve um error." });
   }
