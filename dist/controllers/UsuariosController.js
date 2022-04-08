@@ -7,6 +7,7 @@ exports.adiciona = void 0;
 const express_validator_1 = require("express-validator");
 const sequelize_1 = require("sequelize");
 const Usuario_1 = __importDefault(require("../models/Usuario"));
+const Historico_1 = __importDefault(require("../models/Historico"));
 async function adiciona(req, res) {
     const errors = (0, express_validator_1.validationResult)(req);
     if (!errors.isEmpty()) {
@@ -22,6 +23,10 @@ async function adiciona(req, res) {
             return res.status(422).send({ error: "Email já em uso." });
         }
         const novoUsuario = await Usuario_1.default.create(req.body);
+        await Historico_1.default.create({
+            usuarioId: novoUsuario.id,
+            dados: JSON.stringify(novoUsuario),
+        });
         return res.status(200).json({
             id: novoUsuario.id,
             nome: novoUsuario.nome,

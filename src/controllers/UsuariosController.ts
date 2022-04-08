@@ -2,6 +2,7 @@ import { validationResult, Result } from "express-validator";
 import { Request, Response } from "express";
 import { Op } from "sequelize";
 import Usuario from "../models/Usuario";
+import Historico from "../models/Historico";
 
 export async function adiciona(req: Request, res: Response) {
   const errors: Result = validationResult(req);
@@ -21,6 +22,11 @@ export async function adiciona(req: Request, res: Response) {
     }
 
     const novoUsuario = await Usuario.create(req.body);
+
+    await Historico.create({
+      usuarioId: novoUsuario.id,
+      dados: JSON.stringify(novoUsuario),
+    });
 
     return res.status(200).json({
       id: novoUsuario.id,
