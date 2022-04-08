@@ -19,6 +19,7 @@
     "nodeserver",
     "sequelize",
     "Tyriar",
+    "Usuario",
     "usuarios"
   ]
 }
