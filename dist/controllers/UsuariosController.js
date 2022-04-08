@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.get = exports.editar = exports.adiciona = void 0;
+exports.remove = exports.get = exports.editar = exports.adiciona = void 0;
 const express_validator_1 = require("express-validator");
 const sequelize_1 = require("sequelize");
 const Usuario_1 = __importDefault(require("../models/Usuario"));
@@ -99,4 +99,24 @@ async function get(req, res) {
     }
 }
 exports.get = get;
+async function remove(req, res) {
+    try {
+        const usuario = await Usuario_1.default.findOne({
+            where: { id: req.params.id },
+        });
+        if (!usuario) {
+            return res.status(404).send({ error: "Usuário Removido." });
+        }
+        await Historico_1.default.create({
+            usuarioId: usuario.id,
+            dados: JSON.stringify(usuario),
+        });
+        await usuario.destroy();
+        return res.status(200).send({ msg: "Usuário Removido com sucesso." });
+    }
+    catch (error) {
+        return res.status(422).send({ error: "Houve um error." });
+    }
+}
+exports.remove = remove;
 //# sourceMappingURL=UsuariosController.js.map

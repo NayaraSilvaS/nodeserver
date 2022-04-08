@@ -105,3 +105,26 @@ export async function get(req: Request, res: Response) {
     return res.status(422).send({ error: "Houve um error." });
   }
 }
+
+export async function remove(req: Request, res: Response) {
+  try {
+    const usuario = await Usuario.findOne({
+      where: { id: req.params.id },
+    });
+
+    if (!usuario) {
+      return res.status(404).send({ error: "Usuário Removido." });
+    }
+
+    await Historico.create({
+      usuarioId: usuario.id,
+      dados: JSON.stringify(usuario),
+    });
+
+    await usuario.destroy();
+
+    return res.status(200).send({ msg: "Usuário Removido com sucesso." });
+  } catch (error) {
+    return res.status(422).send({ error: "Houve um error." });
+  }
+}

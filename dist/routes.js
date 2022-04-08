@@ -33,5 +33,6 @@ const routes = express_1.default.Router();
 routes.post("/usuarios", usuarioFormulario_1.default, UsuariosController.adiciona);
 routes.put("/usuarios/:id", usuarioFormulario_1.default, UsuariosController.editar);
 routes.get("/usuarios/:id", UsuariosController.get);
+routes.delete("/usuarios/:id", UsuariosController.remove);
 exports.default = routes;
 //# sourceMappingURL=routes.js.map
