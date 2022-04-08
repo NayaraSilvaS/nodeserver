@@ -1,0 +1,4 @@
+// DOC Responsável por migrar os bancos 
+npx sequelize-cli db:migrate
+// DOC Responsável por gerar o arquivo de migração
+npx sequelize-cli migration:generate --name node_server

@@ -3,6 +3,7 @@
     "brazilian",
     "cabecalho",
     "Coenraad",
+    "DATETIME",
     "devcontainer",
     "donjayamanne",
     "dracula",
@@ -10,11 +11,14 @@
     "esbenp",
     "githistory",
     "Gruntfuggly",
+    "Inno",
     "kinuca",
     "mhutchie",
     "naumovs",
     "nayarasilvas",
     "nodeserver",
-    "Tyriar"
+    "sequelize",
+    "Tyriar",
+    "usuarios"
   ]
 }
