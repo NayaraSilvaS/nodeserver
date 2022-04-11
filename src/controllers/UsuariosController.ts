@@ -133,6 +133,13 @@ export async function paginate(req: Request, res: Response) {
   try {
     const { pagina = 1, nome = "", sobrenome = "", email = "" } = req.body;
     const condicoes: any[] = [];
+    let paginaAtual = Number(pagina) || 1;
+    if (paginaAtual < 1) {
+      paginaAtual = 1;
+    }
+
+    // tslint:disable-next-line: no-console
+    console.log(paginaAtual);
 
     if (nome) {
       condicoes.push({
@@ -150,14 +157,52 @@ export async function paginate(req: Request, res: Response) {
       });
     }
 
+    const limit = 15;
+    const offset = (paginaAtual - 1) * limit;
     const usuarios = await Usuario.findAndCountAll({
       attributes: ["id", "nome", "sobrenome", "email"],
       where: { [Op.and]: condicoes },
-      offset: 0,
+      limit,
+      offset,
     });
 
+    const ultimaPagina = Math.ceil(usuarios.count / limit);
+    const proximaPagina =
+      ultimaPagina < paginaAtual ? ultimaPagina : paginaAtual + 1;
     return res.status(200).json({
-      usuarios,
+      total: usuarios.count,
+      primeiroItem: offset + 1,
+      ultimoItem: limit * paginaAtual,
+      paginaAtual,
+      itens: usuarios.rows,
+      proximaPagina,
+      paginaAnterior: paginaAtual - 1 || 1,
+      ultimaPagina,
+    });
+  } catch (error) {
+    return res.status(422).send({ error: "Houve um error." });
+  }
+}
+
+export async function historico(req: Request, res: Response) {
+  try {
+    const usuario = await Usuario.findOne({
+      where: { id: req.params.id },
+    });
+
+    if (!usuario) {
+      return res.status(404).send({ error: "Usuário não encontrado." });
+    }
+
+    const historicos = await Historico.findAll({
+      where: { usuarioId: req.params.id },
+      order: [["id", "DESC"]],
+    });
+    return res.status(200).json({
+      nome: usuario.nome,
+      sobrenome: usuario.sobrenome,
+      email: usuario.email,
+      historicos,
     });
   } catch (error) {
     return res.status(422).send({ error: "Houve um error." });

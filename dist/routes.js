@@ -34,5 +34,7 @@ routes.post("/usuarios", usuarioFormulario_1.default, UsuariosController.adicion
 routes.put("/usuarios/:id", usuarioFormulario_1.default, UsuariosController.editar);
 routes.get("/usuarios/:id", UsuariosController.get);
 routes.delete("/usuarios/:id", UsuariosController.remove);
+routes.post("/usuarios/paginate", UsuariosController.paginate);
+routes.get("/usuarios/:id/historicos", UsuariosController.historico);
 exports.default = routes;
 //# sourceMappingURL=routes.js.map
