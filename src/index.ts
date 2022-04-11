@@ -10,6 +10,7 @@ const port = 3000; // default port to listen
 app.use(bodyParser.json());
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "twig");
+app.use("/static", express.static(path.join(__dirname, "static")));
 
 // define a route handler for the default home page
 app.get("/", async (req: Request, res: Response) => {

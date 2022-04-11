@@ -1,4 +1,15 @@
 {% extends "index.html.twig" %}
 {% block body %}
-<h2>Nayara!</h2>
+<div class="bg-light">
+    {% include "pesquisa.html.twig" %}
+    <hr>
+    {% include "paginate.html.twig" %}
+</div>
+{% endblock %}
+{% block css %}
+<link href="../static/css/style.css" rel="stylesheet">
+{% endblock %}
+{% block js %}
+<script type="module" src="../static/js/paginate.js"></script>
+<script type="module" src="../static/js/index.js"></script>
 {% endblock %}
