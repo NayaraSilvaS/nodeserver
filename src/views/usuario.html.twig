@@ -1,0 +1,70 @@
+<div
+    class="modal"
+    tabindex="-1"
+    id="usuario"
+    data-bs-backdrop="static"
+    data-bs-keyboard="false">
+  <div class="modal-dialog">
+    <div class="modal-content bg-light">
+      <div class="modal-header">
+        <h5 class="modal-title">Modal</h5>
+        <button 
+          type="button" 
+          class="btn-close" 
+          data-bs-dismiss="modal" 
+          aria-label="Close">
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="usuarioForm">
+          <input 
+              type="hidden" 
+              class="form-control" 
+              id="inputId">
+          <div class="mb-3">
+            <label 
+              for="inputNome" 
+              class="form-label">Nome
+            </label>
+            <input 
+              type="text" 
+              class="form-control" 
+              id="inputNome">
+          </div>
+          <div class="mb-3">
+            <label 
+              for="inputSobrenome" 
+              class="form-label">Sobrenome
+            </label>
+            <input 
+              type="text" 
+              class="form-control" 
+              id="inputSobrenome">
+          </div>
+          <div class="mb-3">
+            <label 
+              for="inputEmail" 
+              class="form-label">Email
+            </label>
+            <input 
+              type="text" 
+              class="form-control" 
+              id="inputEmail" 
+              aria-describedby="emailHelp">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" 
+          class="btn btn-secondary" 
+          data-bs-dismiss="modal">Fechar
+        </button>
+        <button 
+          type="button" 
+          class="btn btn-primary" id="salvarUsuario">Salvar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -5,11 +5,15 @@
     <hr>
     {% include "paginate.html.twig" %}
 </div>
+<div>
+    {% include "usuario.html.twig" %}
+</div>
 {% endblock %}
 {% block css %}
 <link href="../static/css/style.css" rel="stylesheet">
 {% endblock %}
 {% block js %}
 <script type="module" src="../static/js/paginate.js"></script>
+<script type="module" src="../static/js/handlerShowModalUsuario.js"></script>
 <script type="module" src="../static/js/index.js"></script>
 {% endblock %}

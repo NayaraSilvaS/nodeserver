@@ -1,22 +1,57 @@
 <form class="bg-dark mx-4 rounded-bottom border-light" id="pesquisa">
     <div class="mx-5 pt-3 row">
         <div class="mb-3 col">
-            <label for="exampleInputNome" class="form-label text-white">Nome</label>
-            <input type="text" class="form-control" id="exampleInputNome" aria-describedby="emailHelp">
+            <label
+                for="exampleInputNome"
+                class="form-label text-white">
+                Nome
+            </label>
+            <input
+                type="text"
+                class="form-control"
+                id="exampleInputNome"
+                aria-describedby="emailHelp">
+        </div>
+        <div 
+            class="mb-3 col">
+            <label 
+                for="exampleInputSobrenome" 
+                class="form-label text-white">Sobrenome
+            </label>
+            <input 
+                type="text" 
+                class="form-control" 
+                id="exampleInputSobrenome">
         </div>
         <div class="mb-3 col">
-            <label for="exampleInputSobrenome" class="form-label text-white">Sobrenome</label>
-            <input type="text" class="form-control" id="exampleInputSobrenome">
-        </div>
-        <div class="mb-3 col">
-            <label for="exampleInputEmail" class="form-label text-white">Email</label>
-            <input type="text" class="form-control" id="exampleInputEmail">
+            <label 
+                for="exampleInputEmail" 
+                class="form-label text-white">Email
+            </label>
+            <input 
+                type="text" 
+                class="form-control"
+                id="exampleInputEmail">
         </div>
     </div>
     <div class="row pb-3">
         <div class="d-flex justify-content-center align-items-center">
-            <button type="button" class="btn me-3 btn-primary buscar">Buscar</button>
-            <button type="button" class="btn btn-secondary limpar">Limpar</button>
+            <button 
+                type="button" 
+                class="btn me-3 btn-success" 
+                data-bs-toggle="modal" 
+                data-bs-target="#usuario" 
+                data-bs-whatever="Novo Usuário">
+                Novo Usuário
+            </button>
+            <button 
+                type="button" 
+                class="btn me-3 btn-primary buscar">Buscar
+            </button>
+            <button 
+                type="button"
+                class="btn btn-secondary limpar">Limpar
+            </button>
         </div>
     </div>
 </form>
