@@ -37,7 +37,14 @@ export default function paginate() {
         document.querySelector(".lista").innerHTML = resultado.itens
           .map((usuario) => {
             return `<tr>
-                <td></td>
+                <td>
+                  <i
+                    class="fa-solid fa-pencil"
+                    title="Editar Usuário"
+                    data-bs-toggle="modal"
+                    data-bs-target="#usuario"
+                    data-bs-whatever="Editar Usuário"></i>
+                </td>
                 <td>${usuario.nome}</td>
                 <td>${usuario.sobrenome}</td>
                 <td>${usuario.email}</td>
