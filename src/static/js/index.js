@@ -19,4 +19,5 @@ const novoUsuario = document.getElementById("btn-novoUsuario");
 novoUsuario.addEventListener("click", function () {
   document.getElementById("usuarioForm").reset();
   document.getElementById("inputId").value = "";
+  document.getElementById("btn-historico").classList.add("visually-hidden");
 });

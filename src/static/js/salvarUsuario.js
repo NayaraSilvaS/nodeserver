@@ -46,6 +46,10 @@ export default function salvarUsuario() {
           document.getElementById("inputId").value = resultado.id;
           handlerToastSuccess();
           handlerTitulo();
+          document
+            .getElementById("btn-historico")
+            .classList.remove("visually-hidden");
+
           break;
         default:
           handlerToastError("Houve um erro");
