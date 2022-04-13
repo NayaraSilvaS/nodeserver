@@ -1,3 +1,5 @@
+import procurarUsuario from "./procurarUsuario.js";
+
 export default function paginate() {
   const itemClicado = this;
   let pagina = 1;
@@ -36,10 +38,10 @@ export default function paginate() {
       if (response.status == 200) {
         document.querySelector(".lista").innerHTML = resultado.itens
           .map((usuario) => {
-            return `<tr>
+            return `<tr id="${usuario.id}">
                 <td>
                   <i
-                    class="fa-solid fa-pencil"
+                    class="fa-solid fa-pencil editarUsuario"
                     title="Editar Usuário"
                     data-bs-toggle="modal"
                     data-bs-target="#usuario"
@@ -59,12 +61,14 @@ export default function paginate() {
           .forEach((item) => {
             item.addEventListener("click", paginate);
           });
+
+        document.querySelectorAll(".editarUsuario").forEach((item) => {
+          item.addEventListener("click", procurarUsuario);
+        });
       }
     })
     .catch(function (error) {
-      console.log(
-        "There has been a problem with your fetch operation: " + error.message
-      );
+      "There has been a problem with your fetch operation: " + error.message;
     });
 }
 
