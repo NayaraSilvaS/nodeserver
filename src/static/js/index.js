@@ -1,6 +1,7 @@
 import paginate from "./paginate.js";
 import handlerShowModalUsuario from "./handlerShowModalUsuario.js";
 import salvarUsuario from "./salvarUsuario.js";
+import historico from "./historico.js";
 
 handlerShowModalUsuario();
 
@@ -21,3 +22,6 @@ novoUsuario.addEventListener("click", function () {
   document.getElementById("inputId").value = "";
   document.getElementById("btn-historico").classList.add("visually-hidden");
 });
+
+const btnHistorico = document.getElementById("btn-historico");
+btnHistorico.addEventListener("click", historico);
