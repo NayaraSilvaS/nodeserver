@@ -21,6 +21,7 @@ novoUsuario.addEventListener("click", function () {
   document.getElementById("usuarioForm").reset();
   document.getElementById("inputId").value = "";
   document.getElementById("btn-historico").classList.add("visually-hidden");
+  document.getElementById("btn-excluir").classList.add("visually-hidden");
 });
 
 const btnHistorico = document.getElementById("btn-historico");

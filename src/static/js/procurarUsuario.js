@@ -1,5 +1,6 @@
 export default function procurarUsuario() {
   document.getElementById("btn-historico").classList.remove("visually-hidden");
+  document.getElementById("btn-excluir").classList.remove("visually-hidden");
   const id = this.parentElement.parentElement.getAttribute("id");
   const myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
