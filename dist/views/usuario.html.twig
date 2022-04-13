@@ -4,7 +4,7 @@
     id="usuario"
     data-bs-backdrop="static"
     data-bs-keyboard="false">
-  <div class="modal-dialog">
+  <div class="modal-dialog  modal-dialog-centered">
     <div class="modal-content bg-light">
       <div class="modal-header">
         <h5 class="modal-title">Modal</h5>
@@ -63,17 +63,21 @@
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" 
+        <button
+          type="button" 
           class="btn btn-secondary" 
-          data-bs-dismiss="modal">Fechar
-        </button>
-        <button type="button" 
-          class="btn btn-primary" id="btn-historico">Histórico
-        </button>
+          data-bs-dismiss="modal">Fechar</button>
+        <button
+          type="button" 
+          class="btn btn-primary"
+          id="btn-historico"
+          data-bs-target="#modalHistorico"
+          data-bs-toggle="modal"
+          data-bs-whatever="Histórico">Histórico</button>
         <button 
           type="button" 
-          class="btn btn-success" id="salvarUsuario">Salvar
-        </button>
+          class="btn btn-success"
+          id="salvarUsuario">Salvar</button>
       </div>
     </div>
   </div>
