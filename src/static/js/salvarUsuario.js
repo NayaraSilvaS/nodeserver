@@ -40,7 +40,7 @@ export default function salvarUsuario() {
           break;
         case 424:
           handlerToastError("Houve um erro");
-          handlerFormularioError();
+          handlerFormularioError(resultado.errors);
           break;
         case 200:
           document.getElementById("inputId").value = resultado.id;
@@ -80,21 +80,20 @@ function handlerToastError(error) {
   toast.show();
 }
 
-function resetFormularioError() {
+export function resetFormularioError() {
   formulario.forEach((campo) => {
     document.querySelector(`.${campo[1]}`).textContent = "";
     document.getElementById(campo[1]).classList.remove("border-danger");
   });
 }
 
-function handlerFormularioError() {
+function handlerFormularioError(errors) {
   formulario.forEach((campo) => {
-    console.log(campo);
-    const errors = resultado.errors.filter((error) => {
+    const errorsCampo = errors.filter((error) => {
       return error.param == campo[0];
     });
-    if (errors.length > 0) {
-      document.querySelector(`.${campo[1]}`).innerHTML = errors
+    if (errorsCampo.length > 0) {
+      document.querySelector(`.${campo[1]}`).innerHTML = errorsCampo
         .map((error) => {
           return error.msg;
         })

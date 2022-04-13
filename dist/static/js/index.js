@@ -14,3 +14,9 @@ limpar.addEventListener("click", function () {
 
 const salvar = document.getElementById("salvarUsuario");
 salvar.addEventListener("click", salvarUsuario);
+
+const novoUsuario = document.getElementById("btn-novoUsuario");
+novoUsuario.addEventListener("click", function () {
+  document.getElementById("usuarioForm").reset();
+  document.getElementById("inputId").value = "";
+});
