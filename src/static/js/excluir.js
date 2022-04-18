@@ -40,11 +40,7 @@ export default function excluir() {
           handlerToastError("Houve um erro");
       }
 
-      document.getElementById("btn-excluir").classList.add("visually-hidden");
-      document.getElementById("voltarExcluir").classList.add("visually-hidden");
-      document
-        .getElementById("fecharExcluir")
-        .classList.remove("visually-hidden");
+      handlerButton();
     })
     .catch(function (error) {
       "There has been a problem with your fetch operation: " + error.message;
@@ -63,4 +59,10 @@ function handlerToastSuccess(mensagem) {
   toastSuccess.querySelector(".toast-body").textContent = mensagem;
   const toast = new window.bootstrap.Toast(toastSuccess);
   toast.show();
+}
+
+function handlerButton() {
+  document.getElementById("btn-excluir").classList.add("visually-hidden");
+  document.getElementById("voltarExcluir").classList.add("visually-hidden");
+  document.getElementById("fecharExcluir").classList.remove("visually-hidden");
 }
