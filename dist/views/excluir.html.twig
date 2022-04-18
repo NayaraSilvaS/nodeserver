@@ -13,25 +13,34 @@
                 <button 
                     type="button" 
                     class="btn-close" 
-                    ata-bs-dismiss="modal" 
+                    data-bs-dismiss="modal" 
                     aria-label="Close"></button>
             </div>
             <div class="modal-body">
+                {% set prefixoId = 'modalExcluir' %}
+                {% include "mensagem.html.twig" with prefixoId %}   
+                <input type="hidden" id="excluirInputId">
                 <div class="bg-warning rounded">
                 <p class="mx-1 p-1 fs-5">
                     <span class="text-secondary">
                         Tem certeza que deseja excluir o usuario
                     </span>
-                    <span class="fw.bold">:nome:</span>
+                    <span class="fw.bold" id="nomeExcluido">:nome:</span>
                     <span class="text-secondary">?</span>
                 </p>
                 </div>
             </div>
             <div class="modal-footer">
+                <button type="button" 
+                class="btn btn-secondary visually-hidden"
+                id="fecharExcluir"
+                data-bs-dismiss="modal" >Fechar</button>
                 <button class="btn btn-secondary" 
+                id="voltarExcluir"
                 data-bs-target="#usuario" 
                 data-bs-toggle="modal"
                 data-bs-whatever="Editar Usuário">Voltar</button>
+                <button type="button" class="btn btn-danger" id="btn-excluir">Excluir</button>
             </div>
         </div>
     </div>

@@ -50,7 +50,7 @@ export default function salvarUsuario() {
             .getElementById("btn-historico")
             .classList.remove("visually-hidden");
           document
-            .getElementById("btn-excluir")
+            .getElementById("btn-modalExcluir")
             .classList.remove("visually-hidden");
 
           break;
