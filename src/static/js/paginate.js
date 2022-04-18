@@ -113,7 +113,7 @@ function handlerPaginate(dados) {
   );
   const disabledAnterior = dados.paginaAtual == 1 ? "disabled" : "";
   listaLinks.push(
-    `<li class="page-item ${disabledAnterior}"><a class="page-link list-group-item-dark" href="#">Anterior</a></li>`
+    `<li class="page-item anterior ${disabledAnterior}"><a class="page-link list-group-item-dark" href="#">Anterior</a></li>`
   );
 
   for (let p = 1; p <= dados.ultimaPagina; p++) {

@@ -8,6 +8,7 @@ handlerShowModalUsuario();
 
 const buscar = document.querySelector(".buscar");
 buscar.addEventListener("click", paginate);
+buscar.click();
 
 const limpar = document.querySelector(".limpar");
 limpar.addEventListener("click", function () {

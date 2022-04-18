@@ -20,6 +20,21 @@ export default function excluir() {
           break;
         case 200:
           handlerToastSuccess(resultado.msg);
+          const pagina = Number(document.querySelector("li.active").innerText);
+          const buscar = document.querySelector(".buscar");
+          if (pagina == 1) {
+            buscar.click();
+          } else {
+            console.log(
+              pagina,
+              document.querySelector(".lista").children.length
+            );
+            if (document.querySelector(".lista").children.length == 1) {
+              document.querySelector("li.anterior > a").click();
+            } else {
+              document.querySelector("li.active > a").click();
+            }
+          }
           break;
         default:
           handlerToastError("Houve um erro");
