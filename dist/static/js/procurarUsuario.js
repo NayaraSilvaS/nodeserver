@@ -3,7 +3,7 @@ export default function procurarUsuario() {
   document
     .getElementById("btn-modalExcluir")
     .classList.remove("visually-hidden");
-  const id = this.parentElement.parentElement.getAttribute("id");
+  const id = this.parentElement.parentElement.parentElement.getAttribute("id");
   const myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
   myHeaders.append("Accept", "application/json");

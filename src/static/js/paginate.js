@@ -1,3 +1,4 @@
+import excluir from "./excluir.js";
 import procurarUsuario from "./procurarUsuario.js";
 
 export default function paginate() {
@@ -40,14 +41,23 @@ export default function paginate() {
           .map((usuario) => {
             return `<tr id="${usuario.id}">
                 <td>
-                  <i
-                    class="fa-solid fa-pencil editarUsuario"
-                    title="Editar Usuário"
-                    data-bs-toggle="modal"
-                    data-bs-target="#usuario"
-                    data-bs-whatever="Editar Usuário"></i>
+                  <div class="d-flex justify-content-between">
+                    <i
+                      class="fa-solid fa-pencil editarUsuario"
+                      title="Editar Usuário"
+                      data-bs-toggle="modal"
+                      data-bs-target="#usuario"
+                      data-bs-whatever="Editar Usuário"></i>
+                    <i
+                      class="fa-solid fa-trash text-danger excluirUsuario"
+                      title="Excluir Usuário"
+                      data-bs-toggle="modal"
+                      data-bs-target="#modalExcluir"
+                      data-bs-whatever="Excluir Usuário"
+                      ></i>
+                  </div>
                 </td>
-                <td>${usuario.nome}</td>
+                <td class="nomeUsuario">${usuario.nome}</td>
                 <td>${usuario.sobrenome}</td>
                 <td>${usuario.email}</td>
             </tr>`;
@@ -65,6 +75,26 @@ export default function paginate() {
         document.querySelectorAll(".editarUsuario").forEach((item) => {
           item.addEventListener("click", procurarUsuario);
         });
+
+        document.querySelectorAll(".excluirUsuario").forEach((item) =>
+          item.addEventListener("click", function () {
+            const linha = this.parentElement.parentElement.parentElement;
+            document.getElementById("excluirInputId").value =
+              linha.getAttribute("id");
+            document.getElementById("nomeExcluido").innerText =
+              linha.querySelector(".nomeUsuario").innerText;
+
+            document
+              .getElementById("btn-excluir")
+              .classList.remove("visually-hidden");
+            document
+              .getElementById("voltarExcluir")
+              .classList.add("visually-hidden");
+            document
+              .getElementById("fecharExcluir")
+              .classList.remove("visually-hidden");
+          })
+        );
       }
     })
     .catch(function (error) {
