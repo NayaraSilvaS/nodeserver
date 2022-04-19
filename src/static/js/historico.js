@@ -22,45 +22,7 @@ export default function historico() {
           handlerToastError(resultado.error);
           break;
         case 200:
-          document.querySelector(".lista-historico").innerHTML = `<tr>
-                <td colspan="3" class="text-center">Sem Resultados</td>
-            </tr>`;
-
-          if (resultado.historicos.length) {
-            let anterior = null;
-            document.querySelector(".lista-historico").innerHTML =
-              resultado.historicos
-                .map(function (h) {
-                  const dados = JSON.parse(h.dados);
-                  if (!anterior) {
-                    anterior = dados;
-                  }
-
-                  const destacaNome = destaque(anterior.nome, dados.nome);
-                  const destacaSobrenome = destaque(
-                    anterior.sobrenome,
-                    dados.sobrenome
-                  );
-                  const destacaEmail = destaque(anterior.email, dados.email);
-
-                  anterior = dados;
-                  return `<tr>
-                    <td>${resultado.nome}</td>
-                    <td>${moment(h.createdAt).format(
-                      "DD/MM/YYYY HH:mm:ss"
-                    )}</td>
-                    <td>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item list-group-item-action list-group-item-dark ${destacaNome}">${dados.nome}</li>
-                            <li class="list-group-item list-group-item-action list-group-item-dark ${destacaSobrenome}">${dados.sobrenome}</li>
-                            <li class="list-group-item list-group-item-action list-group-item-dark ${destacaEmail}">${dados.email}</li>
-                        </ul>
-                    </td>
-                </tr>`;
-                })
-                .join("");
-          }
-
+          handlerLinha(resultado);
           break;
         default:
           handlerToastError("Houve um erro");
@@ -69,6 +31,44 @@ export default function historico() {
     .catch(function (error) {
       "There has been a problem with your fetch operation: " + error.message;
     });
+}
+
+function handlerLinha(resultado) {
+  if (resultado.historicos.length == 0) {
+    document.querySelector(".lista-historico").innerHTML = `<tr>
+    <td colspan="3" class="text-center">Sem Resultados</td>
+    </tr>`;
+    return;
+  }
+
+  let anterior = null;
+  document.querySelector(".lista-historico").innerHTML = resultado.historicos
+    .map(function (h) {
+      const dados = JSON.parse(h.dados);
+      if (!anterior) {
+        anterior = dados;
+      }
+
+      const historicoAlteracoes = handlerHistoricoAlteracoes(anterior, dados);
+      anterior = dados;
+      return `<tr>
+          <td>${resultado.nome}</td>
+          <td>${moment(h.createdAt).format("DD/MM/YYYY HH:mm:ss")}</td>
+          <td>${historicoAlteracoes}</td>
+      </tr>`;
+    })
+    .join("");
+}
+
+function handlerHistoricoAlteracoes(anterior, atual) {
+  return `<ul class="list-group list-group-flush">
+    <li class="list-group-item list-group-item-action list-group-item-dark 
+    ${destaque(anterior.nome, atual.nome)}">${atual.nome}</li>
+    <li class="list-group-item list-group-item-action list-group-item-dark 
+    ${destaque(anterior.sobrenome, atual.sobrenome)}">${atual.sobrenome}</li>
+    <li class="list-group-item list-group-item-action list-group-item-dark 
+    ${destaque(anterior.email, atual.email)}">${atual.email}</li>
+  </ul>`;
 }
 
 function destaque(anterior, atual) {

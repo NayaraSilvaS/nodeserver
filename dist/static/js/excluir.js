@@ -20,35 +20,33 @@ export default function excluir() {
           break;
         case 200:
           handlerToastSuccess(resultado.msg);
-          const pagina = Number(document.querySelector("li.active").innerText);
-          const buscar = document.querySelector(".buscar");
-          if (pagina == 1) {
-            buscar.click();
-          } else {
-            console.log(
-              pagina,
-              document.querySelector(".lista").children.length
-            );
-            if (document.querySelector(".lista").children.length == 1) {
-              document.querySelector("li.anterior > a").click();
-            } else {
-              document.querySelector("li.active > a").click();
-            }
-          }
+          atualizaPaginacao();
           break;
         default:
           handlerToastError("Houve um erro");
       }
 
-      document.getElementById("btn-excluir").classList.add("visually-hidden");
-      document.getElementById("voltarExcluir").classList.add("visually-hidden");
-      document
-        .getElementById("fecharExcluir")
-        .classList.remove("visually-hidden");
+      handlerButton();
     })
     .catch(function (error) {
       "There has been a problem with your fetch operation: " + error.message;
     });
+}
+
+function atualizaPaginacao() {
+  const pagina = Number(document.querySelector("li.active").innerText);
+  const buscar = document.querySelector(".buscar");
+  if (pagina == 1) {
+    buscar.click();
+    return;
+  }
+
+  if (document.querySelector(".lista").children.length == 1) {
+    document.querySelector("li.anterior > a").click();
+    return;
+  }
+
+  document.querySelector("li.active > a").click();
 }
 
 function handlerToastError(error) {
@@ -63,4 +61,10 @@ function handlerToastSuccess(mensagem) {
   toastSuccess.querySelector(".toast-body").textContent = mensagem;
   const toast = new window.bootstrap.Toast(toastSuccess);
   toast.show();
+}
+
+function handlerButton() {
+  document.getElementById("btn-excluir").classList.add("visually-hidden");
+  document.getElementById("voltarExcluir").classList.add("visually-hidden");
+  document.getElementById("fecharExcluir").classList.remove("visually-hidden");
 }
