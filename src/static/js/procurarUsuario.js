@@ -1,8 +1,5 @@
 export default function procurarUsuario() {
-  document.getElementById("btn-historico").classList.remove("visually-hidden");
-  document
-    .getElementById("btn-modalExcluir")
-    .classList.remove("visually-hidden");
+  handlerBotaoModal();
   const id = this.parentElement.parentElement.parentElement.getAttribute("id");
   const myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
@@ -23,11 +20,7 @@ export default function procurarUsuario() {
           handlerToastError(resultado.error);
           break;
         case 200:
-          document.getElementById("inputId").value = resultado.id;
-          document.getElementById("inputNome").value = resultado.nome;
-          document.getElementById("inputSobrenome").value = resultado.sobrenome;
-          document.getElementById("inputEmail").value = resultado.email;
-
+          setFormulario(resultado);
           break;
         default:
           handlerToastError("Houve um erro");
@@ -36,6 +29,20 @@ export default function procurarUsuario() {
     .catch(function (error) {
       "There has been a problem with your fetch operation: " + error.message;
     });
+}
+
+function handlerBotaoModal() {
+  document.getElementById("btn-historico").classList.remove("visually-hidden");
+  document
+    .getElementById("btn-modalExcluir")
+    .classList.remove("visually-hidden");
+}
+
+function setFormulario(usuario) {
+  document.getElementById("inputId").value = usuario.id;
+  document.getElementById("inputNome").value = usuario.nome;
+  document.getElementById("inputSobrenome").value = usuario.sobrenome;
+  document.getElementById("inputEmail").value = usuario.email;
 }
 
 function handlerToastError(error) {

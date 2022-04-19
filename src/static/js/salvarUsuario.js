@@ -43,15 +43,10 @@ export default function salvarUsuario() {
           handlerFormularioError(resultado.errors);
           break;
         case 200:
-          document.getElementById("inputId").value = resultado.id;
+          setId();
           handlerToastSuccess();
           handlerTitulo();
-          document
-            .getElementById("btn-historico")
-            .classList.remove("visually-hidden");
-          document
-            .getElementById("btn-modalExcluir")
-            .classList.remove("visually-hidden");
+          handlerMostraBotao();
 
           break;
         default:
@@ -63,6 +58,17 @@ export default function salvarUsuario() {
         "There has been a problem with your fetch operation: " + error.message
       );
     });
+}
+
+function handlerMostraBotao() {
+  document.getElementById("btn-historico").classList.remove("visually-hidden");
+  document
+    .getElementById("btn-modalExcluir")
+    .classList.remove("visually-hidden");
+}
+
+function setId(resultado) {
+  document.getElementById("inputId").value = resultado.id;
 }
 
 function handlerTitulo() {
